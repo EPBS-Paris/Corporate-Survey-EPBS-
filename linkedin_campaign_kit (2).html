@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecole des Ponts Business School — LinkedIn Campaign Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:       #1E3A8A;
+    --blue-mid:   #2a4fba;
+    --blue-light: #dce6f7;
+    --blue-pale:  #f0f4fb;
+    --white:      #ffffff;
+    --ink:        #0f1b3d;
+    --muted:      #6275a0;
+    --rule:       #d0daf0;
+    --bg:         #f6f8fd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.65; }
+
+  .site-header { background: var(--white); border-bottom: 3px solid var(--blue); padding: 20px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-ecole { font-size: 10px; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: var(--blue); }
+  .logo-ponts { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--blue); letter-spacing: .02em; line-height: 1; }
+  .logo-bs { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); }
+  .header-badge { background: var(--blue); color: var(--white); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 6px 16px; border-radius: 2px; }
+
+  .cover { background: var(--blue); color: var(--white); padding: 60px 60px 52px; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; bottom: -60px; right: 60px; width: 0; height: 0; border-left: 180px solid transparent; border-right: 0 solid transparent; border-bottom: 260px solid rgba(255,255,255,.06); }
+  .cover::after { content: ''; position: absolute; bottom: -60px; right: 180px; width: 0; height: 0; border-left: 120px solid transparent; border-right: 0 solid transparent; border-bottom: 200px solid rgba(255,255,255,.04); }
+  .cover-label { font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 18px; }
+  .cover h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 5vw, 58px); font-weight: 700; line-height: 1.05; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 14px; }
+  .cover h1 span { color: rgba(255,255,255,.4); font-weight: 300; }
+  .cover-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .cover-tag { border: 1px solid rgba(255,255,255,.3); padding: 5px 14px; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border-radius: 2px; color: rgba(255,255,255,.75); }
+
+  .page { max-width: 920px; margin: 0 auto; padding: 0 40px 80px; }
+
+  .section-header { display: flex; align-items: center; gap: 16px; padding: 50px 0 22px; }
+  .section-num { background: var(--blue); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .12em; padding: 4px 10px; border-radius: 2px; text-transform: uppercase; }
+  .section-rule { flex: 1; height: 2px; background: var(--blue); opacity: .12; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--blue); }
+
+  .lang-tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid var(--rule); }
+  .lang-tab { padding: 9px 22px; font-family: 'Barlow', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; border: none; background: transparent; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .2s; }
+  .lang-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+  .ad-panel { display: none; }
+  .ad-panel.active { display: block; }
+
+  .ad-card { background: var(--white); border: 1px solid var(--rule); border-top: 4px solid var(--blue); border-radius: 2px; padding: 30px 34px; }
+  .ad-card + .ad-card { margin-top: 18px; }
+  .ad-format { font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+  .ad-body { font-size: 15px; line-height: 1.8; white-space: pre-wrap; }
+  .ad-body strong { font-weight: 600; }
+  .ad-headline { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .ad-headline-label { font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+  .ad-headline-text { font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 700; text-transform: uppercase; color: var(--blue); line-height: 1.2; }
+  .ad-cta { display: inline-block; margin-top: 13px; padding: 10px 22px; background: var(--blue); color: var(--white); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; border-radius: 2px; }
+  .ad-notes { margin-top: 14px; padding: 13px 16px; background: var(--blue-pale); border-left: 4px solid var(--blue); font-size: 13px; color: var(--muted); }
+
+  .survey-intro { padding: 22px 26px; background: var(--blue); color: var(--white); border-radius: 2px; margin-bottom: 18px; }
+  .survey-intro p { font-size: 14px; line-height: 1.75; opacity: .9; }
+  .survey-intro p + p { margin-top: 8px; }
+
+  .survey-block { margin-bottom: 7px; background: var(--white); border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; }
+  .survey-block-header { padding: 15px 22px; background: var(--blue); display: flex; align-items: center; gap: 14px; cursor: pointer; user-select: none; }
+  .survey-block-num { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; color: rgba(255,255,255,.45); min-width: 20px; }
+  .survey-block-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--white); }
+  .survey-block-toggle { margin-left: auto; color: rgba(255,255,255,.55); font-size: 15px; transition: transform .25s; }
+  .survey-block.open .survey-block-toggle { transform: rotate(180deg); }
+  .survey-block-body { display: none; padding: 4px 22px 22px; }
+  .survey-block.open .survey-block-body { display: block; }
+
+  .q-item { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  .q-item:last-child { border-bottom: none; }
+  .q-num { font-size: 9px; font-weight: 700; letter-spacing: .2em; color: var(--blue); text-transform: uppercase; margin-bottom: 4px; }
+  .q-text { font-size: 15px; font-weight: 500; margin-bottom: 7px; color: var(--ink); }
+  .q-type { font-size: 11px; color: var(--muted); margin-bottom: 9px; font-style: italic; }
+  .q-options { display: flex; flex-direction: column; gap: 4px; }
+  .q-option { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: #2a3660; padding: 7px 12px; background: var(--blue-pale); border: 1px solid var(--rule); border-radius: 2px; }
+  .q-option-box { width: 14px; height: 14px; min-width: 14px; border: 2px solid var(--blue); border-radius: 2px; background: var(--white); }
+  .q-option-circle { width: 14px; height: 14px; min-width: 14px; border: 2px solid var(--blue); border-radius: 50%; background: var(--white); }
+  .q-open { width: 100%; background: var(--blue-pale); border: 1px solid var(--rule); border-radius: 2px; padding: 9px 12px; font-family: 'Barlow', sans-serif; font-size: 13.5px; color: var(--muted); font-style: italic; min-height: 42px; resize: none; }
+  .q-scale { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .q-scale-step { width: 46px; height: 38px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--rule); border-radius: 2px; font-size: 14px; font-weight: 600; background: var(--blue-pale); color: var(--blue); cursor: pointer; transition: all .15s; }
+  .q-scale-step:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
+  .q-scale-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 5px; font-style: italic; }
+
+  .report-callout { margin-top: 40px; padding: 30px 34px; background: var(--blue); color: var(--white); border-radius: 2px; display: flex; gap: 24px; align-items: flex-start; }
+  .callout-icon { font-size: 30px; line-height: 1; }
+  .callout-content h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+  .callout-content p { font-size: 13.5px; opacity: .8; line-height: 1.7; }
+
+  footer { text-align: center; padding: 32px 40px; border-top: 3px solid var(--blue); margin-top: 0; background: var(--white); }
+  footer p { font-size: 11px; color: var(--muted); letter-spacing: .08em; margin-top: 10px; }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 14px 18px; } .cover { padding: 36px 18px 32px; }
+    .page { padding: 0 14px 60px; } .ad-card { padding: 18px; }
+    .survey-block-header { padding: 12px 14px; } .survey-block-body { padding: 4px 14px 18px; }
+    .report-callout { flex-direction: column; gap: 14px; padding: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="logo-wrap">
+    <svg width="40" height="36" viewBox="0 0 44 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,20 10,0 20,20" fill="#1E3A8A"/>
+      <polygon points="10,20 20,40 0,40" fill="#1E3A8A" opacity=".4"/>
+      <polygon points="12,20 22,0 32,20" fill="#1E3A8A" opacity=".65"/>
+      <polygon points="22,0 32,20 44,0" fill="#1E3A8A" opacity=".3"/>
+      <polygon points="22,20 32,40 12,40" fill="#1E3A8A" opacity=".5"/>
+    </svg>
+    <div>
+      <div class="logo-ecole">École des</div>
+      <div class="logo-ponts">PONTS</div>
+      <div class="logo-bs">Business School</div>
+    </div>
+  </div>
+  <div class="header-badge">LinkedIn Campaign Kit 2025</div>
+</div>
+
+<div class="cover">
+  <p class="cover-label">Étude nationale · National Study</p>
+  <h1>Formation &amp; Montée<br><span>en</span> Compétences</h1>
+  <div class="cover-meta">
+    <span class="cover-tag">LinkedIn Sponsored Content</span>
+    <span class="cover-tag">Lead Generation Survey</span>
+    <span class="cover-tag">French Market — B2B</span>
+    <span class="cover-tag">24 Questions · FR + EN</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ── SECTION 1: AD COPY ── -->
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <div class="section-rule"></div>
+    <h2 class="section-title">LinkedIn Ad Copy</h2>
+  </div>
+
+  <div class="lang-tabs" id="tabs-ad">
+    <button class="lang-tab active" onclick="switchLang('ad','fr',event)">🇫🇷 Français</button>
+    <button class="lang-tab" onclick="switchLang('ad','en',event)">🇬🇧 English</button>
+  </div>
+
+  <div class="ad-panel active" id="ad-fr">
+    <div class="ad-card">
+      <div class="ad-format">Version A — Post sponsorisé · Texte principal</div>
+      <div class="ad-body"><strong>Vous voulez comparer la stratégie de formation de votre entreprise avec celle des autres acteurs de votre secteur ?</strong>
+
+Les besoins en compétences évoluent à une vitesse sans précédent — leadership dans l'incertitude, transformation digitale, développement durable, IA appliquée au métier…
+
+Nous menons une étude nationale sur les pratiques et priorités de formation des entreprises françaises.
+
+📊 <strong>Participez à l'enquête (5 min)</strong> et recevez en exclusivité le rapport complet avec les benchmarks de votre secteur.
+
+Découvrez comment votre stratégie se positionne par rapport à vos pairs — et identifiez les leviers de développement les plus impactants pour vos équipes.
+
+👇 Répondez à l'enquête ci-dessous.</div>
+      <div class="ad-headline">
+        <div class="ad-headline-label">Titre de l'annonce (max. 150 car.)</div>
+        <div class="ad-headline-text">Formation & compétences : où en sont vraiment les entreprises françaises ?</div>
+        <span class="ad-cta">Participer à l'étude</span>
+      </div>
+    </div>
+    <div class="ad-card">
+      <div class="ad-format">Version B — Variante concision</div>
+      <div class="ad-body"><strong>Quelle est votre plus grande priorité RH pour les 12 prochains mois ?</strong>
+
+Rétention des talents, transformation des compétences, leadership, digital… les enjeux ne manquent pas.
+
+Nous lançons une grande enquête nationale sur les besoins en formation des entreprises françaises.
+
+✅ 5 minutes chrono
+✅ Résultats et benchmark offerts
+✅ Données anonymisées
+
+Participez et positionnez-vous dans le panorama du développement des compétences en France.</div>
+      <div class="ad-headline">
+        <div class="ad-headline-label">Titre de l'annonce</div>
+        <div class="ad-headline-text">Recevez le benchmark national Formation & Compétences 2025</div>
+        <span class="ad-cta">Je participe</span>
+      </div>
+    </div>
+    <div class="ad-notes">💡 <strong>Ciblage LinkedIn :</strong> Fonctions = DRH, Directeur Formation, DG, DAF · Taille = 200+ salariés · Secteurs = Industrie, Services, Finance, Conseil, Santé · Localisation = France</div>
+  </div>
+
+  <div class="ad-panel" id="ad-en">
+    <div class="ad-card">
+      <div class="ad-format">Version A — Sponsored Post · Main text</div>
+      <div class="ad-body"><strong>Want to compare your company's learning strategy with others in your industry?</strong>
+
+Skill needs are evolving faster than ever — leadership in uncertainty, digital transformation, sustainability, AI applied to your business…
+
+We're conducting a national study on the learning & upskilling practices of French companies.
+
+📊 <strong>Take the survey (5 min)</strong> and receive the full benchmark report — including insights from your industry — exclusively.
+
+Find out how your strategy compares to your peers and identify the highest-impact development levers for your teams.
+
+👇 Take the survey below.</div>
+      <div class="ad-headline">
+        <div class="ad-headline-label">Ad headline (max. 150 chars)</div>
+        <div class="ad-headline-text">Learning & Skills: Where do French companies really stand?</div>
+        <span class="ad-cta">Join the Study</span>
+      </div>
+    </div>
+    <div class="ad-card">
+      <div class="ad-format">Version B — Short variant</div>
+      <div class="ad-body"><strong>What is your top HR priority for the next 12 months?</strong>
+
+Talent retention, skills transformation, leadership, digital adoption… the stakes have never been higher.
+
+We're launching a national survey on corporate learning needs across France.
+
+✅ 5 minutes only
+✅ Free benchmark report included
+✅ Fully anonymised data
+
+Participate and see where you stand in France's corporate learning landscape.</div>
+      <div class="ad-headline">
+        <div class="ad-headline-label">Ad headline</div>
+        <div class="ad-headline-text">Get the 2025 National Learning & Skills Benchmark Report</div>
+        <span class="ad-cta">I'm in</span>
+      </div>
+    </div>
+    <div class="ad-notes">💡 <strong>LinkedIn targeting:</strong> Functions = CHRO, L&D Director, CEO, CFO, General Manager · Size = 200+ employees · Industries = Manufacturing, Services, Finance, Consulting, Healthcare · Location = France</div>
+  </div>
+
+  <!-- ── SECTION 2: SURVEY ── -->
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <div class="section-rule"></div>
+    <h2 class="section-title">Survey Questions — Q1 to Q24</h2>
+  </div>
+
+  <div class="lang-tabs" id="tabs-survey">
+    <button class="lang-tab active" onclick="switchLang('survey','fr',event)">🇫🇷 Français</button>
+    <button class="lang-tab" onclick="switchLang('survey','en',event)">🇬🇧 English</button>
+  </div>
+
+  <!-- ════ FRENCH SURVEY ════ -->
+  <div class="ad-panel active" id="survey-fr">
+    <div class="survey-intro">
+      <p><strong>Merci pour votre participation.</strong> Cette enquête est menée par Ecole des Ponts Business School dans le cadre d'une étude nationale sur les pratiques de formation et de développement des compétences en entreprise. Elle prend environ 5 minutes.</p>
+      <p>Toutes les réponses sont anonymisées. En complétant l'enquête, vous recevrez gratuitement le rapport de benchmark complet.</p>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">A</span><span class="survey-block-title">Votre entreprise</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">Dans quel secteur d'activité opère principalement votre entreprise ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Industrie / Manufacture</div><div class="q-option"><span class="q-option-circle"></span>Services aux entreprises / Conseil</div><div class="q-option"><span class="q-option-circle"></span>Finance / Assurance / Banque</div><div class="q-option"><span class="q-option-circle"></span>Santé / Pharma / MedTech</div><div class="q-option"><span class="q-option-circle"></span>Distribution / Commerce de détail</div><div class="q-option"><span class="q-option-circle"></span>Énergie / Environnement</div><div class="q-option"><span class="q-option-circle"></span>Technologies / Digital</div><div class="q-option"><span class="q-option-circle"></span>Secteur public / ESS</div><div class="q-option"><span class="q-option-circle"></span>Autre : ___________</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">Quelle est la taille de votre entreprise (en nombre de salariés) ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Moins de 50</div><div class="q-option"><span class="q-option-circle"></span>50 – 249</div><div class="q-option"><span class="q-option-circle"></span>250 – 999</div><div class="q-option"><span class="q-option-circle"></span>1 000 – 4 999</div><div class="q-option"><span class="q-option-circle"></span>5 000 et plus</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">Quelle est votre fonction principale au sein de l'entreprise ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Direction générale (PDG, DG, Président)</div><div class="q-option"><span class="q-option-circle"></span>Direction RH / Directeur(trice) Formation</div><div class="q-option"><span class="q-option-circle"></span>Direction opérationnelle (Directeur de BU, Directeur de département)</div><div class="q-option"><span class="q-option-circle"></span>Direction financière (DAF)</div><div class="q-option"><span class="q-option-circle"></span>Manager intermédiaire</div><div class="q-option"><span class="q-option-circle"></span>Autre : ___________</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">Quel est votre budget annuel consacré à la formation et au développement des compétences ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Moins de 50 000 €</div><div class="q-option"><span class="q-option-circle"></span>50 000 – 200 000 €</div><div class="q-option"><span class="q-option-circle"></span>200 000 – 500 000 €</div><div class="q-option"><span class="q-option-circle"></span>500 000 – 1 M€</div><div class="q-option"><span class="q-option-circle"></span>Plus de 1 M€</div><div class="q-option"><span class="q-option-circle"></span>Je ne souhaite pas répondre</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">B</span><span class="survey-block-title">Approche L&D et actions 2025</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q5</div><div class="q-text">Comment votre entreprise aborde-t-elle la formation et le développement des compétences ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Nous avons une stratégie L&D formalisée, avec un plan pluriannuel et des objectifs définis</div><div class="q-option"><span class="q-option-circle"></span>Nous avons une approche annuelle structurée, mais sans vision pluriannuelle</div><div class="q-option"><span class="q-option-circle"></span>Nous répondons aux besoins au cas par cas, selon les demandes des managers ou des collaborateurs</div><div class="q-option"><span class="q-option-circle"></span>Notre approche est essentiellement ad hoc, sans planification formalisée</div></div></div>
+        <div class="q-item"><div class="q-num">Q6</div><div class="q-text">Faites-vous appel à des organismes de formation externes pour vos collaborateurs ou managers ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Oui, régulièrement</div><div class="q-option"><span class="q-option-circle"></span>Oui, occasionnellement</div><div class="q-option"><span class="q-option-circle"></span>Non, principalement en interne</div><div class="q-option"><span class="q-option-circle"></span>Non, pas du tout pour l'instant</div></div></div>
+        <div class="q-item"><div class="q-num">Q7</div><div class="q-text">Quels types de programmes avez-vous utilisés au cours des 2 dernières années ? (Plusieurs réponses possibles)</div><div class="q-type">Choix multiple</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Formations courtes (1 à 5 jours)</div><div class="q-option"><span class="q-option-box"></span>Programmes de management / leadership (plusieurs semaines)</div><div class="q-option"><span class="q-option-box"></span>Programmes sur mesure (custom corporate)</div><div class="q-option"><span class="q-option-box"></span>Parcours certifiants / diplômants</div><div class="q-option"><span class="q-option-box"></span>MBA ou Executive MBA</div><div class="q-option"><span class="q-option-box"></span>DBA (Doctorate in Business Administration)</div><div class="q-option"><span class="q-option-box"></span>E-learning / formation à distance</div><div class="q-option"><span class="q-option-box"></span>Coaching individuel ou de groupe</div><div class="q-option"><span class="q-option-box"></span>Aucun programme externe</div></div></div>
+        <div class="q-item"><div class="q-num">Q8</div><div class="q-text">Quelles actions de formation avez-vous mises en place en 2025 pour vos collaborateurs ? (Plusieurs réponses possibles)</div><div class="q-type">Choix multiple</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Séminaires ou formations courtes en présentiel</div><div class="q-option"><span class="q-option-box"></span>Programmes de management / leadership (plusieurs semaines)</div><div class="q-option"><span class="q-option-box"></span>Programmes sur mesure avec un partenaire externe</div><div class="q-option"><span class="q-option-box"></span>E-learning / modules en ligne</div><div class="q-option"><span class="q-option-box"></span>Coaching individuel ou de groupe</div><div class="q-option"><span class="q-option-box"></span>Conférences / événements professionnels</div><div class="q-option"><span class="q-option-box"></span>Aucune action formalisée en 2025</div></div></div>
+        <div class="q-item"><div class="q-num">Q9</div><div class="q-text">Dans l'ensemble, êtes-vous satisfait(e) des actions de formation menées en 2025 ?</div><div class="q-type">Échelle (1 = Pas du tout satisfait(e) · 5 = Très satisfait(e))</div><div class="q-scale"><div class="q-scale-step">1</div><div class="q-scale-step">2</div><div class="q-scale-step">3</div><div class="q-scale-step">4</div><div class="q-scale-step">5</div></div><div class="q-scale-labels"><span>Pas du tout satisfait(e)</span><span>Très satisfait(e)</span></div></div>
+        <div class="q-item"><div class="q-num">Q10</div><div class="q-text">Estimez-vous qu'il existe un écart entre les formations proposées en 2025 et les besoins réels de vos équipes ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Oui, un écart important — les besoins n'ont pas été couverts</div><div class="q-option"><span class="q-option-circle"></span>Oui, un écart partiel — certains besoins sont restés sans réponse</div><div class="q-option"><span class="q-option-circle"></span>Non, les actions menées ont globalement répondu aux besoins</div><div class="q-option"><span class="q-option-circle"></span>Pas d'évaluation formalisée réalisée</div></div></div>
+        <div class="q-item"><div class="q-num">Q11</div><div class="q-text">Quel format préférez-vous pour les programmes de formation de vos managers et dirigeants ?</div><div class="q-type">Choix multiple — classer par ordre de préférence si possible</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Présentiel (sur site ou dans l'école)</div><div class="q-option"><span class="q-option-box"></span>Distanciel (100% en ligne)</div><div class="q-option"><span class="q-option-box"></span>Hybride (mix présentiel / distanciel)</div><div class="q-option"><span class="q-option-box"></span>Résidentiel (séjour immersif)</div><div class="q-option"><span class="q-option-box"></span>Modulaire (modules espacés dans le temps)</div></div></div>
+        <div class="q-item"><div class="q-num">Q12</div><div class="q-text">Quelle durée est la plus adaptée pour un programme de développement destiné à vos cadres et dirigeants en activité ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>1 à 3 jours (séminaire intensif, en une fois)</div><div class="q-option"><span class="q-option-circle"></span>1 semaine (bootcamp résidentiel)</div><div class="q-option"><span class="q-option-circle"></span>2 à 3 mois, en temps partiel (sessions modulaires espacées)</div><div class="q-option"><span class="q-option-circle"></span>6 à 12 mois, en temps partiel (programme Executive)</div><div class="q-option"><span class="q-option-circle"></span>18 à 24 mois, en temps partiel (Executive MBA / DBA)</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">C</span><span class="survey-block-title">Priorités en compétences & recrutement</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q13</div><div class="q-text">Quelles sont vos 3 priorités principales en matière de développement des compétences pour les 12 à 24 prochains mois ?</div><div class="q-type">Choix multiple (max. 3)</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Leadership & management dans l'incertitude</div><div class="q-option"><span class="q-option-box"></span>Intelligence artificielle appliquée au métier</div><div class="q-option"><span class="q-option-box"></span>Transformation digitale & data</div><div class="q-option"><span class="q-option-box"></span>RSE / Stratégie durable & impact</div><div class="q-option"><span class="q-option-box"></span>Finance & gestion pour non-financiers</div><div class="q-option"><span class="q-option-box"></span>Stratégie & développement business</div><div class="q-option"><span class="q-option-box"></span>Innovation & entrepreneuriat</div><div class="q-option"><span class="q-option-box"></span>Gestion du changement & conduite de transformation</div><div class="q-option"><span class="q-option-box"></span>Management interculturel & international</div><div class="q-option"><span class="q-option-box"></span>Autre : ___________</div></div></div>
+        <div class="q-item"><div class="q-num">Q14</div><div class="q-text">Pour quelle(s) population(s) cherchez-vous principalement à développer les compétences ? (Plusieurs réponses possibles)</div><div class="q-type">Choix multiple</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Comité de direction / C-suite</div><div class="q-option"><span class="q-option-box"></span>Hauts potentiels (HiPo)</div><div class="q-option"><span class="q-option-box"></span>Managers de proximité / intermédiaires</div><div class="q-option"><span class="q-option-box"></span>Experts techniques en transition vers le management</div><div class="q-option"><span class="q-option-box"></span>Ensemble de l'encadrement</div></div></div>
+        <div class="q-item"><div class="q-num">Q15</div><div class="q-text">Sur une échelle de 1 à 5, dans quelle mesure estimez-vous que votre entreprise est bien positionnée pour développer les compétences de ses équipes face aux défis actuels ?</div><div class="q-type">Échelle (1 = Pas du tout bien positionnée · 5 = Très bien positionnée)</div><div class="q-scale"><div class="q-scale-step">1</div><div class="q-scale-step">2</div><div class="q-scale-step">3</div><div class="q-scale-step">4</div><div class="q-scale-step">5</div></div><div class="q-scale-labels"><span>Pas du tout</span><span>Très bien</span></div></div>
+        <div class="q-item"><div class="q-num">Q16</div><div class="q-text">Dans quelle mesure est-il facile pour votre entreprise de recruter des collaborateurs disposant des compétences adaptées à vos besoins ?</div><div class="q-type">Échelle (1 = Très difficile · 5 = Très facile)</div><div class="q-scale"><div class="q-scale-step">1</div><div class="q-scale-step">2</div><div class="q-scale-step">3</div><div class="q-scale-step">4</div><div class="q-scale-step">5</div></div><div class="q-scale-labels"><span>Très difficile</span><span>Très facile</span></div></div>
+        <div class="q-item"><div class="q-num">Q17</div><div class="q-text">Pour quelles compétences rencontrez-vous les plus grandes difficultés de recrutement ? (Plusieurs réponses possibles)</div><div class="q-type">Choix multiple</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Leadership & management de haut niveau</div><div class="q-option"><span class="q-option-box"></span>Intelligence artificielle & compétences data</div><div class="q-option"><span class="q-option-box"></span>Transformation digitale & technologie</div><div class="q-option"><span class="q-option-box"></span>RSE / Développement durable & impact</div><div class="q-option"><span class="q-option-box"></span>Finance & gestion avancée</div><div class="q-option"><span class="q-option-box"></span>Stratégie & développement commercial international</div><div class="q-option"><span class="q-option-box"></span>Gestion du changement & conduite de transformation</div><div class="q-option"><span class="q-option-box"></span>Expertise sectorielle spécifique</div><div class="q-option"><span class="q-option-box"></span>Nous ne rencontrons pas de difficultés particulières</div></div></div>
+        <div class="q-item"><div class="q-num">Q18</div><div class="q-text">Face aux difficultés de recrutement, avez-vous recours à la formation interne ou à des programmes externes pour développer ces compétences en interne ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Oui, c'est notre stratégie principale face aux tensions du marché</div><div class="q-option"><span class="q-option-circle"></span>Oui, en complément du recrutement</div><div class="q-option"><span class="q-option-circle"></span>Non, nous privilégions le recrutement externe</div><div class="q-option"><span class="q-option-circle"></span>Non, nous n'avons pas encore de stratégie définie sur ce point</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">D</span><span class="survey-block-title">Prise de décision & critères de sélection</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q19</div><div class="q-text">Dans votre organisation, qui identifie généralement le besoin en formation ou décide qu'un programme est nécessaire ? (Plusieurs réponses possibles)</div><div class="q-type">Choix multiple</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>La Direction générale, dans le cadre de la stratégie d'entreprise</div><div class="q-option"><span class="q-option-box"></span>La DRH / Direction Formation, sur la base d'un diagnostic des besoins</div><div class="q-option"><span class="q-option-box"></span>Les managers opérationnels, en fonction des besoins de leurs équipes</div><div class="q-option"><span class="q-option-box"></span>Les collaborateurs eux-mêmes, via une demande individuelle</div><div class="q-option"><span class="q-option-box"></span>Un processus formalisé d'évaluation des compétences (entretiens annuels, GPEC…)</div></div></div>
+        <div class="q-item"><div class="q-num">Q20</div><div class="q-text">Qui prend la décision finale pour le choix et l'approbation d'un programme de formation externe ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>DRH / Directeur Formation uniquement</div><div class="q-option"><span class="q-option-circle"></span>Direction générale uniquement</div><div class="q-option"><span class="q-option-circle"></span>Décision conjointe DRH + Direction générale</div><div class="q-option"><span class="q-option-circle"></span>Manager opérationnel concerné</div><div class="q-option"><span class="q-option-circle"></span>Comité dédié (talent & learning committee)</div></div></div>
+        <div class="q-item"><div class="q-num">Q21</div><div class="q-text">Quels sont les principaux critères de sélection lors du choix d'un prestataire de formation ? (max. 3)</div><div class="q-type">Choix multiple (max. 3)</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Réputation / notoriété de l'école ou de l'organisme</div><div class="q-option"><span class="q-option-box"></span>Qualité des intervenants / praticiens</div><div class="q-option"><span class="q-option-box"></span>Personnalisation du programme</div><div class="q-option"><span class="q-option-box"></span>Retour sur expérience d'autres entreprises</div><div class="q-option"><span class="q-option-box"></span>Prix / rapport qualité-prix</div><div class="q-option"><span class="q-option-box"></span>Certifications ou accréditations (AACSB, EQUIS…)</div><div class="q-option"><span class="q-option-box"></span>Dimension internationale du programme</div><div class="q-option"><span class="q-option-box"></span>Flexibilité du format et des horaires</div></div></div>
+        <div class="q-item"><div class="q-num">Q22</div><div class="q-text">Quels sont les principaux freins qui vous empêchent d'investir davantage en formation ? (Plusieurs réponses possibles)</div><div class="q-type">Choix multiple</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Budget insuffisant</div><div class="q-option"><span class="q-option-box"></span>Manque de temps disponible des collaborateurs</div><div class="q-option"><span class="q-option-box"></span>Difficulté à mesurer le ROI</div><div class="q-option"><span class="q-option-box"></span>Offre de formation ne correspondant pas assez aux besoins</div><div class="q-option"><span class="q-option-box"></span>Manque d'engagement de la direction</div><div class="q-option"><span class="q-option-box"></span>Complexité administrative (OPCO, CPF…)</div><div class="q-option"><span class="q-option-box"></span>Aucun frein particulier</div></div></div>
+        <div class="q-item"><div class="q-num">Q23</div><div class="q-text">Seriez-vous ouvert(e) à être recontacté(e) par Ecole des Ponts Business School pour en savoir plus sur nos programmes ?</div><div class="q-type">Choix unique</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Oui, avec plaisir</div><div class="q-option"><span class="q-option-circle"></span>Oui, mais uniquement par e-mail</div><div class="q-option"><span class="q-option-circle"></span>Non, pour le moment</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">E</span><span class="survey-block-title">Recevoir le rapport — Vos coordonnées</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q24</div><div class="q-text">Pour recevoir gratuitement le rapport de benchmark « Formation & Compétences en France 2025 », merci de renseigner vos coordonnées :</div><div class="q-type">Champs ouverts</div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-top:8px">
+            <textarea class="q-open" rows="1" placeholder="Prénom et Nom *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Adresse e-mail professionnelle *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Nom de l'entreprise *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Intitulé du poste *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Numéro de téléphone (optionnel)"></textarea>
+          </div>
+          <p style="font-size:11px;color:var(--muted);margin-top:9px">Vos données sont traitées conformément au RGPD et ne seront jamais revendues. Vous pouvez vous désabonner à tout moment.</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- /survey-fr -->
+
+  <!-- ════ ENGLISH SURVEY ════ -->
+  <div class="ad-panel" id="survey-en">
+    <div class="survey-intro">
+      <p><strong>Thank you for taking part.</strong> This survey is conducted by Ecole des Ponts Business School as part of a national study on corporate learning and upskilling practices in France. It takes approximately 5 minutes.</p>
+      <p>All responses are anonymised. By completing the survey, you will receive the full benchmark report, free of charge.</p>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">A</span><span class="survey-block-title">Your Company</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q1</div><div class="q-text">What is your company's primary industry?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Manufacturing / Industry</div><div class="q-option"><span class="q-option-circle"></span>Business Services / Consulting</div><div class="q-option"><span class="q-option-circle"></span>Finance / Insurance / Banking</div><div class="q-option"><span class="q-option-circle"></span>Healthcare / Pharma / MedTech</div><div class="q-option"><span class="q-option-circle"></span>Retail / Consumer Goods</div><div class="q-option"><span class="q-option-circle"></span>Energy / Environment</div><div class="q-option"><span class="q-option-circle"></span>Technology / Digital</div><div class="q-option"><span class="q-option-circle"></span>Public Sector / Non-profit</div><div class="q-option"><span class="q-option-circle"></span>Other: ___________</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div class="q-text">How many employees does your company have?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Fewer than 50</div><div class="q-option"><span class="q-option-circle"></span>50 – 249</div><div class="q-option"><span class="q-option-circle"></span>250 – 999</div><div class="q-option"><span class="q-option-circle"></span>1,000 – 4,999</div><div class="q-option"><span class="q-option-circle"></span>5,000 and above</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div class="q-text">What is your primary role within the company?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>General Management (CEO, MD, President)</div><div class="q-option"><span class="q-option-circle"></span>HR Director / Head of Learning & Development</div><div class="q-option"><span class="q-option-circle"></span>Operational Director (BU Director, Department Head)</div><div class="q-option"><span class="q-option-circle"></span>Chief Financial Officer (CFO)</div><div class="q-option"><span class="q-option-circle"></span>Middle Manager</div><div class="q-option"><span class="q-option-circle"></span>Other: ___________</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div class="q-text">What is your annual budget dedicated to training and skills development?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Less than €50,000</div><div class="q-option"><span class="q-option-circle"></span>€50,000 – €200,000</div><div class="q-option"><span class="q-option-circle"></span>€200,000 – €500,000</div><div class="q-option"><span class="q-option-circle"></span>€500,000 – €1M</div><div class="q-option"><span class="q-option-circle"></span>Over €1M</div><div class="q-option"><span class="q-option-circle"></span>Prefer not to say</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">B</span><span class="survey-block-title">L&D Approach & 2025 Actions</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q5</div><div class="q-text">How does your company approach learning and skills development?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>We have a formalised L&D strategy with a multi-year plan and defined objectives</div><div class="q-option"><span class="q-option-circle"></span>We have a structured annual approach, but without a multi-year vision</div><div class="q-option"><span class="q-option-circle"></span>We respond to needs on a case-by-case basis, driven by manager or employee requests</div><div class="q-option"><span class="q-option-circle"></span>Our approach is largely ad hoc, with no formal planning</div></div></div>
+        <div class="q-item"><div class="q-num">Q6</div><div class="q-text">Do you currently use external training providers for your employees or managers?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Yes, on a regular basis</div><div class="q-option"><span class="q-option-circle"></span>Yes, occasionally</div><div class="q-option"><span class="q-option-circle"></span>No, we primarily train in-house</div><div class="q-option"><span class="q-option-circle"></span>No, not at all for now</div></div></div>
+        <div class="q-item"><div class="q-num">Q7</div><div class="q-text">Which types of programmes have you used in the last 2 years? (Multiple answers possible)</div><div class="q-type">Multiple choice</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Short courses (1–5 days)</div><div class="q-option"><span class="q-option-box"></span>Management / leadership programmes (several weeks)</div><div class="q-option"><span class="q-option-box"></span>Custom corporate programmes</div><div class="q-option"><span class="q-option-box"></span>Certificated / degree-level programmes</div><div class="q-option"><span class="q-option-box"></span>MBA or Executive MBA</div><div class="q-option"><span class="q-option-box"></span>DBA (Doctorate in Business Administration)</div><div class="q-option"><span class="q-option-box"></span>E-learning / online learning</div><div class="q-option"><span class="q-option-box"></span>Individual or group coaching</div><div class="q-option"><span class="q-option-box"></span>No external programme</div></div></div>
+        <div class="q-item"><div class="q-num">Q8</div><div class="q-text">What training actions did you implement in 2025 for your employees? (Multiple answers possible)</div><div class="q-type">Multiple choice</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Short in-person seminars or workshops</div><div class="q-option"><span class="q-option-box"></span>Management / leadership programmes (several weeks)</div><div class="q-option"><span class="q-option-box"></span>Custom programmes with an external partner</div><div class="q-option"><span class="q-option-box"></span>E-learning / online modules</div><div class="q-option"><span class="q-option-box"></span>Individual or group coaching</div><div class="q-option"><span class="q-option-box"></span>Conferences / professional events</div><div class="q-option"><span class="q-option-box"></span>No formal training actions in 2025</div></div></div>
+        <div class="q-item"><div class="q-num">Q9</div><div class="q-text">Overall, how satisfied are you with the training actions carried out in 2025?</div><div class="q-type">Satisfaction scale (1 = Not at all satisfied · 5 = Very satisfied)</div><div class="q-scale"><div class="q-scale-step">1</div><div class="q-scale-step">2</div><div class="q-scale-step">3</div><div class="q-scale-step">4</div><div class="q-scale-step">5</div></div><div class="q-scale-labels"><span>Not at all satisfied</span><span>Very satisfied</span></div></div>
+        <div class="q-item"><div class="q-num">Q10</div><div class="q-text">Do you feel there is a gap between the training provided in 2025 and the actual needs of your teams?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Yes, a significant gap — key needs were not addressed</div><div class="q-option"><span class="q-option-circle"></span>Yes, a partial gap — some needs remained unmet</div><div class="q-option"><span class="q-option-circle"></span>No, the training broadly met our needs</div><div class="q-option"><span class="q-option-circle"></span>No formal evaluation was carried out</div></div></div>
+        <div class="q-item"><div class="q-num">Q11</div><div class="q-text">What delivery format do you prefer for leadership and management development programmes?</div><div class="q-type">Multiple choice — rank by preference if possible</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>In-person (on-site or at the school)</div><div class="q-option"><span class="q-option-box"></span>Fully online / remote</div><div class="q-option"><span class="q-option-box"></span>Hybrid (mix of in-person and online)</div><div class="q-option"><span class="q-option-box"></span>Residential (immersive stay)</div><div class="q-option"><span class="q-option-box"></span>Modular (spaced-out sessions over time)</div></div></div>
+        <div class="q-item"><div class="q-num">Q12</div><div class="q-text">What duration is most suitable for a development programme aimed at your executives and managers in active employment?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>1–3 days (intensive seminar, in one block)</div><div class="q-option"><span class="q-option-circle"></span>1 week (residential bootcamp)</div><div class="q-option"><span class="q-option-circle"></span>2–3 months, part-time (spaced modular sessions)</div><div class="q-option"><span class="q-option-circle"></span>6–12 months, part-time (Executive programme)</div><div class="q-option"><span class="q-option-circle"></span>18–24 months, part-time (Executive MBA / DBA)</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">C</span><span class="survey-block-title">Skills Priorities & Recruitment</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q13</div><div class="q-text">What are your top 3 skills development priorities for the next 12–24 months?</div><div class="q-type">Multiple choice (max. 3)</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Leadership & management in uncertainty</div><div class="q-option"><span class="q-option-box"></span>AI applied to your business</div><div class="q-option"><span class="q-option-box"></span>Digital transformation & data</div><div class="q-option"><span class="q-option-box"></span>CSR / Sustainable strategy & impact</div><div class="q-option"><span class="q-option-box"></span>Finance & management for non-finance professionals</div><div class="q-option"><span class="q-option-box"></span>Strategy & business development</div><div class="q-option"><span class="q-option-box"></span>Innovation & entrepreneurship</div><div class="q-option"><span class="q-option-box"></span>Change management & transformation</div><div class="q-option"><span class="q-option-box"></span>Cross-cultural & international management</div><div class="q-option"><span class="q-option-box"></span>Other: ___________</div></div></div>
+        <div class="q-item"><div class="q-num">Q14</div><div class="q-text">Which employee populations are you primarily looking to develop? (Multiple answers possible)</div><div class="q-type">Multiple choice</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Executive committee / C-suite</div><div class="q-option"><span class="q-option-box"></span>High-potential talents (HiPo)</div><div class="q-option"><span class="q-option-box"></span>Front-line / middle managers</div><div class="q-option"><span class="q-option-box"></span>Technical experts transitioning into management</div><div class="q-option"><span class="q-option-box"></span>All management levels</div></div></div>
+        <div class="q-item"><div class="q-num">Q15</div><div class="q-text">On a scale of 1 to 5, how well-positioned do you feel your company is to develop the skills of your teams to face current challenges?</div><div class="q-type">Scale (1 = Not at all · 5 = Very well-positioned)</div><div class="q-scale"><div class="q-scale-step">1</div><div class="q-scale-step">2</div><div class="q-scale-step">3</div><div class="q-scale-step">4</div><div class="q-scale-step">5</div></div><div class="q-scale-labels"><span>Not at all</span><span>Very well</span></div></div>
+        <div class="q-item"><div class="q-num">Q16</div><div class="q-text">How easy is it for your company to recruit people with the right skills for your needs?</div><div class="q-type">Scale (1 = Very difficult · 5 = Very easy)</div><div class="q-scale"><div class="q-scale-step">1</div><div class="q-scale-step">2</div><div class="q-scale-step">3</div><div class="q-scale-step">4</div><div class="q-scale-step">5</div></div><div class="q-scale-labels"><span>Very difficult</span><span>Very easy</span></div></div>
+        <div class="q-item"><div class="q-num">Q17</div><div class="q-text">For which skills do you face the greatest recruitment difficulties? (Multiple answers possible)</div><div class="q-type">Multiple choice</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Senior leadership & management</div><div class="q-option"><span class="q-option-box"></span>AI & data skills</div><div class="q-option"><span class="q-option-box"></span>Digital transformation & technology</div><div class="q-option"><span class="q-option-box"></span>CSR / Sustainability & impact</div><div class="q-option"><span class="q-option-box"></span>Advanced finance & management</div><div class="q-option"><span class="q-option-box"></span>International strategy & business development</div><div class="q-option"><span class="q-option-box"></span>Change management & transformation</div><div class="q-option"><span class="q-option-box"></span>Specific sector expertise</div><div class="q-option"><span class="q-option-box"></span>We do not face particular recruitment difficulties</div></div></div>
+        <div class="q-item"><div class="q-num">Q18</div><div class="q-text">Faced with recruitment difficulties, do you use internal training or external programmes to develop these skills from within?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Yes, this is our primary strategy in response to talent market pressures</div><div class="q-option"><span class="q-option-circle"></span>Yes, as a complement to external recruitment</div><div class="q-option"><span class="q-option-circle"></span>No, we prioritise external recruitment</div><div class="q-option"><span class="q-option-circle"></span>No, we don't yet have a defined strategy on this</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">D</span><span class="survey-block-title">Decision-Making & Selection Criteria</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q19</div><div class="q-text">In your organisation, who typically identifies the need for training or decides that a programme is required? (Multiple answers possible)</div><div class="q-type">Multiple choice</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>General management, as part of the business strategy</div><div class="q-option"><span class="q-option-box"></span>HR / L&D function, based on a needs assessment</div><div class="q-option"><span class="q-option-box"></span>Operational managers, based on their team's needs</div><div class="q-option"><span class="q-option-box"></span>Employees themselves, via individual requests</div><div class="q-option"><span class="q-option-box"></span>A formalised skills assessment process (annual reviews, skills mapping…)</div></div></div>
+        <div class="q-item"><div class="q-num">Q20</div><div class="q-text">Who makes the final decision when selecting and approving an external training programme?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>HR Director / L&D Head only</div><div class="q-option"><span class="q-option-circle"></span>General management only</div><div class="q-option"><span class="q-option-circle"></span>Joint decision: HR + General management</div><div class="q-option"><span class="q-option-circle"></span>Relevant operational manager</div><div class="q-option"><span class="q-option-circle"></span>Dedicated talent & learning committee</div></div></div>
+        <div class="q-item"><div class="q-num">Q21</div><div class="q-text">What are the most important criteria when selecting a training provider? (max. 3)</div><div class="q-type">Multiple choice (max. 3)</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>School or provider reputation / brand</div><div class="q-option"><span class="q-option-box"></span>Quality of faculty / practitioners</div><div class="q-option"><span class="q-option-box"></span>Programme customisation</div><div class="q-option"><span class="q-option-box"></span>Peer reviews and references from other companies</div><div class="q-option"><span class="q-option-box"></span>Price / value for money</div><div class="q-option"><span class="q-option-box"></span>Accreditations (AACSB, EQUIS…)</div><div class="q-option"><span class="q-option-box"></span>International dimension of the programme</div><div class="q-option"><span class="q-option-box"></span>Flexibility of format and scheduling</div></div></div>
+        <div class="q-item"><div class="q-num">Q22</div><div class="q-text">What are the main barriers preventing you from investing more in training? (Multiple answers possible)</div><div class="q-type">Multiple choice</div><div class="q-options"><div class="q-option"><span class="q-option-box"></span>Insufficient budget</div><div class="q-option"><span class="q-option-box"></span>Lack of available time for employees</div><div class="q-option"><span class="q-option-box"></span>Difficulty measuring ROI</div><div class="q-option"><span class="q-option-box"></span>Training offerings don't match our specific needs</div><div class="q-option"><span class="q-option-box"></span>Lack of senior leadership buy-in</div><div class="q-option"><span class="q-option-box"></span>Administrative complexity</div><div class="q-option"><span class="q-option-box"></span>No particular barriers</div></div></div>
+        <div class="q-item"><div class="q-num">Q23</div><div class="q-text">Would you be open to being contacted by Ecole des Ponts Business School to learn more about our programmes?</div><div class="q-type">Single choice</div><div class="q-options"><div class="q-option"><span class="q-option-circle"></span>Yes, I'd welcome a conversation</div><div class="q-option"><span class="q-option-circle"></span>Yes, by email only</div><div class="q-option"><span class="q-option-circle"></span>Not for now</div></div></div>
+      </div>
+    </div>
+
+    <div class="survey-block open" onclick="toggleBlock(this)">
+      <div class="survey-block-header"><span class="survey-block-num">E</span><span class="survey-block-title">Receive the Report — Your Details</span><span class="survey-block-toggle">▾</span></div>
+      <div class="survey-block-body">
+        <div class="q-item"><div class="q-num">Q24</div><div class="q-text">To receive the free "Learning & Skills in France 2025" benchmark report, please fill in your contact details:</div><div class="q-type">Open fields</div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-top:8px">
+            <textarea class="q-open" rows="1" placeholder="First and Last Name *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Professional email address *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Company name *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Job title *"></textarea>
+            <textarea class="q-open" rows="1" placeholder="Phone number (optional)"></textarea>
+          </div>
+          <p style="font-size:11px;color:var(--muted);margin-top:9px">Your data is processed in compliance with GDPR and will never be sold. You can unsubscribe at any time.</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- /survey-en -->
+
+  <div class="report-callout">
+    <div class="callout-icon">📑</div>
+    <div class="callout-content">
+      <h3>What the benchmark report will include</h3>
+      <p>L&D strategy maturity, training budgets, top skills priorities, recruitment difficulties, preferred formats and durations — all broken down by company size and sector. Each respondent receives the full report to benchmark their organisation against the national picture.</p>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  <div class="logo-wrap" style="justify-content:center">
+    <svg width="32" height="28" viewBox="0 0 44 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,20 10,0 20,20" fill="#1E3A8A"/><polygon points="10,20 20,40 0,40" fill="#1E3A8A" opacity=".4"/>
+      <polygon points="12,20 22,0 32,20" fill="#1E3A8A" opacity=".65"/><polygon points="22,0 32,20 44,0" fill="#1E3A8A" opacity=".3"/>
+      <polygon points="22,20 32,40 12,40" fill="#1E3A8A" opacity=".5"/>
+    </svg>
+    <div><div class="logo-ecole">École des</div><div class="logo-ponts">PONTS</div><div class="logo-bs">Business School</div></div>
+  </div>
+  <p>LinkedIn Campaign Kit · Formation & Compétences France 2025 · Confidentiel</p>
+</footer>
+
+<script>
+  function switchLang(group, lang, e) {
+    document.querySelectorAll('#tabs-' + group + ' .lang-tab').forEach(t => t.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    document.querySelectorAll('[id^="' + group + '-"]').forEach(p => p.classList.remove('active'));
+    document.getElementById(group + '-' + lang).classList.add('active');
+  }
+  function toggleBlock(b) { b.classList.toggle('open'); }
+</script>
+</body>
+</html>
